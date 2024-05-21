@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:movies_app/src/feature/home/widget/recomended_section.dart';
+import 'package:movies_app/src/feature/home/view/widget/recomended_section.dart';
 import 'package:movies_app/src/utils/app_text_styles.dart';
 
 class HomeDetails extends StatelessWidget {
