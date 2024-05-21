@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_app/src/feature/browse/browse_screen.dart';
 import 'package:movies_app/src/feature/home/view/home_screen.dart';
-import 'package:movies_app/src/feature/search/search_screen.dart';
+import 'package:movies_app/src/feature/search/view/search_screen.dart';
 import 'package:movies_app/src/feature/watchlist/watchlist_screen.dart';
 import 'package:movies_app/src/utils/app_colors.dart';
 
