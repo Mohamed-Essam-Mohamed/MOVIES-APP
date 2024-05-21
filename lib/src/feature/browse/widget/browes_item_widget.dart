@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/src/model/genre_model.dart';
 import 'package:movies_app/src/utils/app_text_styles.dart';
 
-class CustomContainer extends StatelessWidget {
+class BrowesItemWidget extends StatelessWidget {
   GenreDM genre;
   int index;
-  CustomContainer({required this.genre, required this.index});
+  BrowesItemWidget({required this.genre, required this.index});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
