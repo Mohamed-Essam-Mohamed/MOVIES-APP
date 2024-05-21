@@ -24,7 +24,7 @@ class MoviesApp extends StatelessWidget {
           title: 'Movies App',
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeMode.dark,
-          initialRoute: HomeDetails.routeName,
+          initialRoute: InitApp.routeName,
           routes: {
             InitApp.routeName: (context) => InitApp(),
             HomeScreen.routeName: (context) => HomeScreen(),
