@@ -12,7 +12,3 @@ class PopularRemoteDataSourceImp implements PopularRemoteDataSource {
     return await apiManger.getPopularMovies();
   }
 }
-
-PopularRemoteDataSource injectPopularRemoteDataSource() {
-  return PopularRemoteDataSourceImp(apiManger: ApiManger.instance);
-}
