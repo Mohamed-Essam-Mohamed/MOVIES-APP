@@ -37,12 +37,12 @@ class ApiManger {
     }
   }
 
-  Future<Either<Failure, MovieResponseDto>> getRealeases() async {
+  Future<Either<Failure, MovieResponseDto>> getReleases() async {
     final List<ConnectivityResult> connectivityResult =
         await (Connectivity().checkConnectivity());
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi)) {
-      Uri url = Uri.https(apiBaseUrl, apiRealesesEndPoint, {
+      Uri url = Uri.https(apiBaseUrl, apiReleasesEndPoint, {
         "api_key": apiKey,
       });
       var response = await http.get(url);
