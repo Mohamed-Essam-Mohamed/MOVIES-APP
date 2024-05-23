@@ -6,7 +6,7 @@ import 'package:movies_app/src/repository/rcommend_repository/recommend_datasour
 import 'package:movies_app/src/repository/rcommend_repository/recommend_repository_contract.dart';
 import 'package:movies_app/src/repository/rcommend_repository/recommend_repository_imp/recommend_repository_imp.dart';
 import 'package:movies_app/src/repository/releases_repository/realease_repository_imp/release_repository_imp.dart';
-import 'package:movies_app/src/repository/releases_repository/realeases_remote_datasource_imp/realeases_remote_datasource_imp.dart';
+import 'package:movies_app/src/repository/releases_repository/realeases_datasource_imp/realeases_remote_datasource_imp.dart';
 import 'package:movies_app/src/repository/releases_repository/realeases_repository_contract.dart';
 //? popular dependency injection
 
