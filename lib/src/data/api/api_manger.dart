@@ -36,4 +36,46 @@ class ApiManger {
       return Left(NetworkFailure(errorMessage: "No internet connection"));
     }
   }
+
+  Future<Either<Failure, MovieResponseDto>> getRealeases() async {
+    final List<ConnectivityResult> connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi)) {
+      Uri url = Uri.https(apiBaseUrl, apiRealesesEndPoint, {
+        "api_key": apiKey,
+      });
+      var response = await http.get(url);
+      var popularResponse =
+          MovieResponseDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(popularResponse);
+      } else {
+        return Left(ServerFailure(errorMessage: popularResponse.statusMessage));
+      }
+    } else {
+      return Left(NetworkFailure(errorMessage: "No internet connection"));
+    }
+  }
+
+  Future<Either<Failure, MovieResponseDto>> getRecommended() async {
+    final List<ConnectivityResult> connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi)) {
+      Uri url = Uri.https(apiBaseUrl, apiRecommendEndPoint, {
+        "api_key": apiKey,
+      });
+      var response = await http.get(url);
+      var popularResponse =
+          MovieResponseDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(popularResponse);
+      } else {
+        return Left(ServerFailure(errorMessage: popularResponse.statusMessage));
+      }
+    } else {
+      return Left(NetworkFailure(errorMessage: "No internet connection"));
+    }
+  }
 }
