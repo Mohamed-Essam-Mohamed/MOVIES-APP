@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:movies_app/src/utils/app_colors.dart';
-import 'package:movies_app/src/utils/app_text_styles.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_text_styles.dart';
 
 class TitleImageWidget extends StatelessWidget {
   const TitleImageWidget({

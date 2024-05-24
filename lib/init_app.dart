@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:movies_app/src/feature/browse/browse_screen.dart';
-import 'package:movies_app/src/feature/home/view/home_screen.dart';
-import 'package:movies_app/src/feature/search/view/search_screen.dart';
-import 'package:movies_app/src/feature/watchlist/watchlist_screen.dart';
-import 'package:movies_app/src/utils/app_colors.dart';
+import 'src/feature/browse/browse_screen.dart';
+import 'src/feature/home/view/home_screen.dart';
+import 'src/feature/search/view/search_screen.dart';
+import 'src/feature/watchlist/watchlist_screen.dart';
+import 'src/utils/app_colors.dart';
 
 class InitApp extends StatefulWidget {
   static const String routeName = 'InitApp';

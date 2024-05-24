@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:movies_app/src/constants/app_api_const.dart';
-import 'package:movies_app/src/feature/home/view_model/recommended_view_model/recommended_view_model_cubit.dart';
-import 'package:movies_app/src/helper/dpi.dart';
-import 'package:movies_app/src/utils/app_colors.dart';
-import 'package:movies_app/src/utils/app_text_styles.dart';
+import '../../../../constants/app_api_const.dart';
+import '../../view_model/recommended_view_model/recommended_view_model_cubit.dart';
+import '../../../../helper/dpi.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_text_styles.dart';
 
 class ListViewRecomendAndLikeWidget extends StatefulWidget {
   const ListViewRecomendAndLikeWidget({

@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/src/feature/home/view/widget/popular_section.dart';
-import 'package:movies_app/src/feature/home/view_model/populer_view_model/populer_view_model_cubit.dart';
-import 'package:movies_app/src/helper/dpi.dart';
+import 'popular_section.dart';
+import '../../view_model/populer_view_model/populer_view_model_cubit.dart';
+import '../../../../helper/dpi.dart';
 
 class CarouselSliderWidget extends StatefulWidget {
   const CarouselSliderWidget({

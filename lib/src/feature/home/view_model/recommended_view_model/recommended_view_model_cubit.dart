@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:movies_app/src/data/model/response/movie_details_respons_dto.dart';
-import 'package:movies_app/src/repository/rcommend_repository/recommend_repository_contract.dart';
+import '../../../../data/model/response/movie_details_respons_dto.dart';
+import '../../../../repository/rcommend_repository/recommend_repository_contract.dart';
 
 part 'recommended_view_model_state.dart';
 

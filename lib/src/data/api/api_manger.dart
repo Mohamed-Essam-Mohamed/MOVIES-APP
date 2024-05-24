@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
-import 'package:movies_app/src/constants/app_api_const.dart';
-import 'package:movies_app/src/data/model/response/movie_respons_dto.dart';
-import 'package:movies_app/src/helper/failure.dart';
+import '../../constants/app_api_const.dart';
+import '../model/response/movie_respons_dto.dart';
+import '../../helper/failure.dart';
 import 'package:http/http.dart' as http;
 
 class ApiManger {

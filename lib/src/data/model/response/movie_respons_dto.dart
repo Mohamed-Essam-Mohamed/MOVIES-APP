@@ -1,4 +1,4 @@
-import 'package:movies_app/src/data/model/response/movie_details_respons_dto.dart';
+import 'movie_details_respons_dto.dart';
 
 class MovieResponseDto {
   MovieResponseDto({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/src/data/model/dataclass/genre_model.dart';
-import 'package:movies_app/src/utils/app_text_styles.dart';
+import '../../../data/model/dataclass/genre_model.dart';
+import '../../../utils/app_text_styles.dart';
 
 class BrowesItemWidget extends StatelessWidget {
   GenreDM genre;

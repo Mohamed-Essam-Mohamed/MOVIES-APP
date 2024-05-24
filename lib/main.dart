@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/init_app.dart';
-import 'package:movies_app/src/data/api/api_manger.dart';
-import 'package:movies_app/src/feature/home/view/home_screen.dart';
-import 'package:movies_app/src/feature/home_details/home_details.dart';
-import 'package:movies_app/src/utils/app_theme.dart';
+import 'init_app.dart';
+import 'src/data/api/api_manger.dart';
+import 'src/feature/home/view/home_screen.dart';
+import 'src/feature/home_details/home_details.dart';
+import 'src/utils/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
