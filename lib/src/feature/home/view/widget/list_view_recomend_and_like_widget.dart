@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:lottie/lottie.dart';
+import 'package:movies_app/src/animation_shimmer/list_view_shimmer.dart';
 import '../../../../constants/app_api_const.dart';
 import '../../view_model/recommended_view_model/recommended_view_model_cubit.dart';
 import '../../../../helper/dpi.dart';
@@ -31,33 +33,42 @@ class _ListViewRecomendAndLikeWidgetState
     return BlocBuilder<RecommendedViewModelCubit, RecommendedViewModelState>(
       bloc: viewModel..getRecommend(),
       builder: (context, state) {
-        return Expanded(
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: AppColors.cardDarkColor,
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                width: 130.w,
-                height: 170.h,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _imageItemReleasesWidget(index: index),
-                    _titleNameImageWidget(index: index),
-                    const Spacer(),
-                    _ratingImageWidget(index: index),
-                    Gap(3.h),
-                  ],
-                ),
-              );
-            },
-            itemCount: viewModel.movieRecommendList.length,
-            separatorBuilder: (context, index) => Gap(14.w),
-          ),
-        );
+        if (state is RecommendedViewModelError) {
+          return Center(
+            child: Text(state.errorMessage),
+          );
+        }
+        if (state is RecommendedViewModelSuccess) {
+          return Expanded(
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.cardDarkColor,
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  width: 130.w,
+                  height: 170.h,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _imageItemReleasesWidget(index: index),
+                      _titleNameImageWidget(index: index),
+                      const Spacer(),
+                      _ratingImageWidget(index: index),
+                      Gap(3.h),
+                    ],
+                  ),
+                );
+              },
+              itemCount: viewModel.movieRecommendList.length,
+              separatorBuilder: (context, index) => Gap(14.w),
+            ),
+          );
+        }
+
+        return const ListViewShimmer();
       },
     );
   }
@@ -108,6 +119,9 @@ class _ListViewRecomendAndLikeWidgetState
           CachedNetworkImage(
             imageUrl:
                 "$imagePrefix${viewModel.movieRecommendList[index].posterPath}",
+            placeholder: (context, url) => Center(
+              child: Lottie.asset('assets/lottie/loading.json'),
+            ),
             errorWidget: (context, url, error) => const Icon(Icons.error),
             fit: BoxFit.fill,
             width: double.infinity,
