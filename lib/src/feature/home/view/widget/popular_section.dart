@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../constants/app_api_const.dart';
 import '../../../../data/model/response/movie_details_respons_dto.dart';
@@ -51,8 +52,11 @@ class PopularSection extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: "$imagePrefix${result.backdropPath}",
       errorWidget: (context, url, error) => const Icon(Icons.error),
+      placeholder: (context, url) => Center(
+        child: Lottie.asset('assets/lottie/loading.json'),
+      ),
       fit: BoxFit.fill,
-      width: 412.w,
+      width: double.infinity,
       height: 217.h,
     );
   }

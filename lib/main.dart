@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/src/animation_shimmer/popular_shimmer.dart';
 import 'init_app.dart';
 import 'src/data/api/api_manger.dart';
 import 'src/feature/home/view/home_screen.dart';
@@ -32,6 +33,7 @@ class MoviesApp extends StatelessWidget {
             InitApp.routeName: (context) => InitApp(),
             HomeScreen.routeName: (context) => HomeScreen(),
             HomeDetails.routeName: (context) => HomeDetails(),
+            PopularShimmer.routeName: (context) => const PopularShimmer(),
           },
         );
       },

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/src/animation_shimmer/popular_shimmer.dart';
 import 'popular_section.dart';
 import '../../view_model/populer_view_model/populer_view_model_cubit.dart';
 import '../../../../helper/dpi.dart';
@@ -50,7 +51,7 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
           );
         }
         return const Center(
-          child: CircularProgressIndicator(),
+          child: PopularShimmer(),
         );
       },
     );
