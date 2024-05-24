@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/src/feature/home/view/widget/popular_section.dart';
-import 'package:movies_app/src/feature/home/view_model/home_view_model_cubit.dart';
+import 'package:movies_app/src/feature/home/view_model/populer_view_model/populer_view_model_cubit.dart';
 import 'package:movies_app/src/helper/dpi.dart';
 
 class CarouselSliderWidget extends StatefulWidget {
@@ -16,20 +16,20 @@ class CarouselSliderWidget extends StatefulWidget {
 }
 
 class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
-  final HomeViewModelCubit viewModel =
-      HomeViewModelCubit(popularRepository: injectPopularRepository());
+  final PopulerViewModelCubit viewModel =
+      PopulerViewModelCubit(popularRepository: injectPopularRepository());
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeViewModelCubit, HomeViewModelState>(
+    return BlocBuilder<PopulerViewModelCubit, PopulerViewModelState>(
       bloc: viewModel..getAllPopular(),
       builder: (context, state) {
-        if (state is HomeViewModelError) {
+        if (state is PopulerViewModelError) {
           return Center(
             child: Text(state.errorMessage ?? "Error"),
           );
         }
-        if (state is HomeViewModelSuccess) {
+        if (state is PopulerViewModelSuccess) {
           return CarouselSlider.builder(
             options: CarouselOptions(
               enlargeCenterPage: true,

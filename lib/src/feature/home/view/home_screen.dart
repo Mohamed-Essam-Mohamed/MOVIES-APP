@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:movies_app/src/feature/home/view/widget/carousel_slider_widget.dart';
 import 'package:movies_app/src/feature/home/view/widget/recomended_section.dart';
 import 'package:movies_app/src/feature/home/view/widget/releases_section.dart';
-import 'package:movies_app/src/feature/home/view_model/home_view_model_cubit.dart';
+import 'package:movies_app/src/feature/home/view_model/populer_view_model/populer_view_model_cubit.dart';
 import 'package:movies_app/src/helper/dpi.dart';
 
 class HomeScreen extends StatelessWidget {
