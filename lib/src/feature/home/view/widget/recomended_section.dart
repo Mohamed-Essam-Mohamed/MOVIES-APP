@@ -9,7 +9,7 @@ class RecomendedSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 280.h,
+      height: 295.h,
       width: double.infinity,
       color: AppColors.darkColor,
       padding: EdgeInsets.all(10.h),
@@ -21,7 +21,7 @@ class RecomendedSection extends StatelessWidget {
             style: AppStyles.textStyle18,
           ),
           Gap(10.h),
-          ListViewRecomendAndLikeWidget(),
+          const ListViewRecomendAndLikeWidget(),
         ],
       ),
     );

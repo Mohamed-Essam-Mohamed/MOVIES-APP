@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:movies_app/src/feature/home/view/widget/image_item_widget.dart';
+import 'package:movies_app/src/feature/home/view_model/releases_view_model/releases_view_model_cubit.dart';
+import 'package:movies_app/src/helper/dpi.dart';
 import 'package:movies_app/src/utils/app_colors.dart';
 import 'package:movies_app/src/utils/app_text_styles.dart';
 
@@ -23,7 +26,7 @@ class ReleasesSection extends StatelessWidget {
               style: AppStyles.textStyle18,
             ),
             Gap(10.h),
-            ListViewNewRelaeasesWidget(),
+            const ListViewNewRelaeasesWidget(),
           ],
         ),
       ),
@@ -31,22 +34,47 @@ class ReleasesSection extends StatelessWidget {
   }
 }
 
-class ListViewNewRelaeasesWidget extends StatelessWidget {
+class ListViewNewRelaeasesWidget extends StatefulWidget {
   const ListViewNewRelaeasesWidget({
     super.key,
   });
 
   @override
+  State<ListViewNewRelaeasesWidget> createState() =>
+      _ListViewNewRelaeasesWidgetState();
+}
+
+class _ListViewNewRelaeasesWidgetState
+    extends State<ListViewNewRelaeasesWidget> {
+  final ReleasesViewModelCubit viewModel =
+      ReleasesViewModelCubit(releaseRepository: injectReleaseRepository());
+
+  @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => ImageItemWidget(
-          imagePath: "",
-        ),
-        separatorBuilder: (context, index) => SizedBox(width: 15.w),
-        itemCount: 11,
-      ),
+    return BlocBuilder<ReleasesViewModelCubit, ReleasesViewModelState>(
+      bloc: viewModel..getReleases(),
+      builder: (context, state) {
+        if (state is ReleasesViewModelError) {
+          return Center(
+            child: Text(state.messageErorr ?? "Error"),
+          );
+        }
+        if (state is ReleasesViewModelSuccess) {
+          return Expanded(
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => ImageItemWidget(
+                imagePath: viewModel.movieReleaseList[index].posterPath ?? "",
+              ),
+              separatorBuilder: (context, index) => SizedBox(width: 15.w),
+              itemCount: viewModel.movieReleaseList.length,
+            ),
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }
