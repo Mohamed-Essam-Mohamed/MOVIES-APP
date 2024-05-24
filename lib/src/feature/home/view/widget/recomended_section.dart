@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:movies_app/src/feature/home/view/widget/list_view_recomend_and_like_widget.dart';
-import 'package:movies_app/src/utils/app_colors.dart';
-import 'package:movies_app/src/utils/app_text_styles.dart';
+import 'list_view_recomend_and_like_widget.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_text_styles.dart';
 
 class RecomendedSection extends StatelessWidget {
   @override

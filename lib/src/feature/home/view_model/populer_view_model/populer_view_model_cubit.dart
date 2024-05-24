@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:movies_app/src/data/api/api_manger.dart';
-import 'package:movies_app/src/data/model/response/movie_details_respons_dto.dart';
-import 'package:movies_app/src/repository/popular_repository/popular_repository_contract.dart';
+import '../../../../data/model/response/movie_details_respons_dto.dart';
+import '../../../../repository/popular_repository/popular_repository_contract.dart';
 
 part 'populer_view_model_state.dart';
 

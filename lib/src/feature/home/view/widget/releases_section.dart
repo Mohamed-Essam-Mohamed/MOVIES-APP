@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:movies_app/src/feature/home/view/widget/image_item_widget.dart';
-import 'package:movies_app/src/feature/home/view_model/releases_view_model/releases_view_model_cubit.dart';
-import 'package:movies_app/src/helper/dpi.dart';
-import 'package:movies_app/src/utils/app_colors.dart';
-import 'package:movies_app/src/utils/app_text_styles.dart';
+import 'image_item_widget.dart';
+import '../../view_model/releases_view_model/releases_view_model_cubit.dart';
+import '../../../../helper/dpi.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_text_styles.dart';
 
 class ReleasesSection extends StatelessWidget {
   const ReleasesSection({super.key});
