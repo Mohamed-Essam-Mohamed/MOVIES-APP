@@ -4,7 +4,7 @@ import 'package:movies_app/src/helper/failure.dart';
 import 'package:movies_app/src/repository/popular_repository/popular_repository_contract.dart';
 
 class PopularRepositoryImp implements PopularRepository {
-  final PopularRemoteDataSource popularRemoteDataSource;
+  PopularRemoteDataSource popularRemoteDataSource;
   PopularRepositoryImp(this.popularRemoteDataSource);
 
   @override

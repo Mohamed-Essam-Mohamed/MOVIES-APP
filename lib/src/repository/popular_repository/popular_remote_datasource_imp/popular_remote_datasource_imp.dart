@@ -9,6 +9,11 @@ class PopularRemoteDataSourceImp implements PopularRemoteDataSource {
   PopularRemoteDataSourceImp({required this.apiManger});
   @override
   Future<Either<Failure, MovieResponseDto>> getPopularMovies() async {
-    return await apiManger.getPopularMovies();
+    var either = await apiManger.getPopularMovies();
+    return either.fold((l) {
+      return Left(Failure(errorMessage: l.errorMessage));
+    }, (r) {
+      return Right(r);
+    });
   }
 }

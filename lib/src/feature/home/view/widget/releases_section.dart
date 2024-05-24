@@ -41,7 +41,9 @@ class ListViewNewRelaeasesWidget extends StatelessWidget {
     return Expanded(
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => ImageItemWidget(),
+        itemBuilder: (context, index) => ImageItemWidget(
+          imagePath: "",
+        ),
         separatorBuilder: (context, index) => SizedBox(width: 15.w),
         itemCount: 11,
       ),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
@@ -25,9 +26,10 @@ class ApiManger {
         "api_key": apiKey,
       });
       var response = await http.get(url);
+
       var popularResponse =
           MovieResponseDto.fromJson(jsonDecode(response.body));
-      if (response.statusCode >= 200 && response.statusCode < 300) {
+      if (response.statusCode == 200) {
         return Right(popularResponse);
       } else {
         return Left(ServerFailure(errorMessage: popularResponse.statusMessage));
