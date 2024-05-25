@@ -1,3 +1,10 @@
+import 'package:movies_app/src/repository/details_repository/details_datasource_imp/details_remote_datasource_imp.dart';
+import 'package:movies_app/src/repository/details_repository/details_repository_contract.dart';
+import 'package:movies_app/src/repository/details_repository/details_repository_imp/details_repositroy_imp.dart';
+import 'package:movies_app/src/repository/similar_repository/similar_datasource_imp/similar_remote_datasource_imp.dart';
+import 'package:movies_app/src/repository/similar_repository/similar_repository_constract.dart';
+import 'package:movies_app/src/repository/similar_repository/similar_repository_imp/similar_repository_imp.dart';
+
 import '../data/api/api_manger.dart';
 import '../repository/popular_repository/popular_remote_datasource_imp/popular_remote_datasource_imp.dart';
 import '../repository/popular_repository/popular_repository_contract.dart';
@@ -38,6 +45,21 @@ ReleaseRepository injectReleaseRepository() {
       releasesRemoteDataSource: injectReleaseRemoteDataSource());
 }
 
-//?
+//? similar dependency injection
+SimilarRemoteDataSource injectSimilarRemoteDataSource() {
+  return SimilarRemoteDatasourceImp(apiManger: ApiManger.instance);
+}
 
+SimilarRepository injectSimilarRepository() {
+  return SimilarRepositoryImp(
+      remoteDataSource: injectSimilarRemoteDataSource());
+}
 
+//? Details dependency injection
+DetailsRemoteDataSource inijectDetailsRemoteDataSource() {
+  return DetailsRemoteDatasourceImp(apiManger: ApiManger.instance);
+}
+
+DetailsRepository injectDetailsRepository() {
+  return DetailsRepositroyImp(dataSource: inijectDetailsRemoteDataSource());
+}

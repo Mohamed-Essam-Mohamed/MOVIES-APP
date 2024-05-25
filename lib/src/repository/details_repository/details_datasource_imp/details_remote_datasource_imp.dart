@@ -18,7 +18,3 @@ class DetailsRemoteDatasourceImp implements DetailsRemoteDataSource {
     });
   }
 }
-
-DetailsRemoteDataSource inijectDetailsRemoteDataSource() {
-  return DetailsRemoteDatasourceImp(apiManger: ApiManger.instance);
-}
