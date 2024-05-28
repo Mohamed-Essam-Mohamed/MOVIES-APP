@@ -6,24 +6,26 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movies_app/src/animation_shimmer/list_view_shimmer.dart';
+import 'package:movies_app/src/feature/details/view/details_screen.dart';
+import 'package:movies_app/src/feature/home/view/widget/popular_section.dart';
 import '../../../../constants/app_api_const.dart';
 import '../../view_model/recommended_view_model/recommended_view_model_cubit.dart';
 import '../../../../helper/dpi.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_text_styles.dart';
 
-class ListViewRecomendAndLikeWidget extends StatefulWidget {
-  const ListViewRecomendAndLikeWidget({
+class ListViewRecommendAndLikeWidget extends StatefulWidget {
+  const ListViewRecommendAndLikeWidget({
     super.key,
   });
 
   @override
-  State<ListViewRecomendAndLikeWidget> createState() =>
-      _ListViewRecomendAndLikeWidgetState();
+  State<ListViewRecommendAndLikeWidget> createState() =>
+      _ListViewRecommendAndLikeWidgetState();
 }
 
-class _ListViewRecomendAndLikeWidgetState
-    extends State<ListViewRecomendAndLikeWidget> {
+class _ListViewRecommendAndLikeWidgetState
+    extends State<ListViewRecommendAndLikeWidget> {
   final RecommendedViewModelCubit viewModel = RecommendedViewModelCubit(
     recommendRepository: injectRecommendRepository(),
   );
@@ -43,23 +45,16 @@ class _ListViewRecomendAndLikeWidgetState
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.cardDarkColor,
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  width: 130.w,
-                  height: 170.h,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      _imageItemReleasesWidget(index: index),
-                      _titleNameImageWidget(index: index),
-                      const Spacer(),
-                      _ratingImageWidget(index: index),
-                      Gap(3.h),
-                    ],
-                  ),
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      DetailsScreen.routeName,
+                      arguments: IdNavigatorDataClass(
+                          id: viewModel.movieRecommendList[index].id),
+                    );
+                  },
+                  child: _showRecommendedForYouWidget(index),
                 );
               },
               itemCount: viewModel.movieRecommendList.length,
@@ -70,6 +65,27 @@ class _ListViewRecomendAndLikeWidgetState
 
         return const ListViewShimmer();
       },
+    );
+  }
+
+  Container _showRecommendedForYouWidget(int index) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.cardDarkColor,
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      width: 130.w,
+      height: 170.h,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _imageItemReleasesWidget(index: index),
+          _titleNameImageWidget(index: index),
+          const Spacer(),
+          _ratingImageWidget(index: index),
+          Gap(3.h),
+        ],
+      ),
     );
   }
 

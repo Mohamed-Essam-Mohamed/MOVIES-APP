@@ -5,7 +5,7 @@ import 'list_view_recomend_and_like_widget.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_text_styles.dart';
 
-class RecomendedSection extends StatelessWidget {
+class RecommendedSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,11 +17,11 @@ class RecomendedSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'New Releases',
+            'Recommended for you',
             style: AppStyles.textStyle18,
           ),
           Gap(10.h),
-          const ListViewRecomendAndLikeWidget(),
+          const ListViewRecommendAndLikeWidget(),
         ],
       ),
     );
