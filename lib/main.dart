@@ -4,7 +4,7 @@ import 'package:movies_app/src/animation_shimmer/popular_shimmer.dart';
 import 'init_app.dart';
 import 'src/data/api/api_manger.dart';
 import 'src/feature/home/view/home_screen.dart';
-import 'src/feature/home_details/home_details.dart';
+import 'src/feature/details/view/details_screen.dart';
 import 'src/utils/app_theme.dart';
 
 void main() {
@@ -32,7 +32,7 @@ class MoviesApp extends StatelessWidget {
           routes: {
             InitApp.routeName: (context) => InitApp(),
             HomeScreen.routeName: (context) => HomeScreen(),
-            HomeDetails.routeName: (context) => HomeDetails(),
+            DetailsScreen.routeName: (context) => DetailsScreen(),
             PopularShimmer.routeName: (context) => const PopularShimmer(),
           },
         );

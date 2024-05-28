@@ -57,9 +57,9 @@ SimilarRepository injectSimilarRepository() {
 
 //? Details dependency injection
 DetailsRemoteDataSource inijectDetailsRemoteDataSource() {
-  return DetailsRemoteDatasourceImp(apiManger: ApiManger.instance);
+  return DetailsRemoteDataSourceImp(apiManger: ApiManger.instance);
 }
 
 DetailsRepository injectDetailsRepository() {
-  return DetailsRepositroyImp(dataSource: inijectDetailsRemoteDataSource());
+  return DetailsRepositoryImp(dataSource: inijectDetailsRemoteDataSource());
 }

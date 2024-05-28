@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:movies_app/src/animation_shimmer/list_view_shimmer.dart';
+import 'package:movies_app/src/feature/details/view/details_screen.dart';
+import 'package:movies_app/src/feature/home/view/widget/popular_section.dart';
 import 'image_item_widget.dart';
 import '../../view_model/releases_view_model/releases_view_model_cubit.dart';
 import '../../../../helper/dpi.dart';
@@ -26,7 +28,7 @@ class ReleasesSection extends StatelessWidget {
               style: AppStyles.textStyle18,
             ),
             Gap(10.h),
-            const ListViewNewRelaeasesWidget(),
+            const ListViewNewReleasesWidget(),
           ],
         ),
       ),
@@ -34,18 +36,17 @@ class ReleasesSection extends StatelessWidget {
   }
 }
 
-class ListViewNewRelaeasesWidget extends StatefulWidget {
-  const ListViewNewRelaeasesWidget({
+class ListViewNewReleasesWidget extends StatefulWidget {
+  const ListViewNewReleasesWidget({
     super.key,
   });
 
   @override
-  State<ListViewNewRelaeasesWidget> createState() =>
-      _ListViewNewRelaeasesWidgetState();
+  State<ListViewNewReleasesWidget> createState() =>
+      _ListViewNewReleasesWidgetState();
 }
 
-class _ListViewNewRelaeasesWidgetState
-    extends State<ListViewNewRelaeasesWidget> {
+class _ListViewNewReleasesWidgetState extends State<ListViewNewReleasesWidget> {
   final ReleasesViewModelCubit viewModel =
       ReleasesViewModelCubit(releaseRepository: injectReleaseRepository());
 
@@ -63,8 +64,18 @@ class _ListViewNewRelaeasesWidgetState
           return Expanded(
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => ImageItemWidget(
-                imagePath: viewModel.movieReleaseList[index].posterPath ?? "",
+              itemBuilder: (context, index) => InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    DetailsScreen.routeName,
+                    arguments: IdNavigatorDataClass(
+                        id: viewModel.movieReleaseList[index].id),
+                  );
+                },
+                child: ImageItemWidget(
+                  imagePath: viewModel.movieReleaseList[index].posterPath ?? "",
+                ),
               ),
               separatorBuilder: (context, index) => SizedBox(width: 15.w),
               itemCount: viewModel.movieReleaseList.length,

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import 'package:movies_app/src/feature/details/view/details_screen.dart';
 
 import '../../../../constants/app_api_const.dart';
 import '../../../../data/model/response/movie_details_respons_dto.dart';
@@ -21,8 +22,8 @@ class PopularSection extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           _backGroundImagePopular(),
-          _positionedImageItemWidget(),
-          _positionedTitleImageWidget()
+          _positionedImageItemWidget(context),
+          _positionedTitleImageWidget(),
         ],
       ),
     );
@@ -40,11 +41,22 @@ class PopularSection extends StatelessWidget {
     );
   }
 
-  Positioned _positionedImageItemWidget() {
+  Positioned _positionedImageItemWidget(BuildContext context) {
     return Positioned(
       top: 100.h,
       left: 21.w,
-      child: ImageItemWidget(imagePath: result.posterPath ?? ''),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            DetailsScreen.routeName,
+            arguments: IdNavigatorDataClass(id: result.id),
+          );
+        },
+        child: ImageItemWidget(
+          imagePath: result.posterPath ?? '',
+        ),
+      ),
     );
   }
 
@@ -60,4 +72,11 @@ class PopularSection extends StatelessWidget {
       height: 217.h,
     );
   }
+}
+
+// data class argument
+class IdNavigatorDataClass {
+  final int? id;
+
+  IdNavigatorDataClass({required this.id});
 }
