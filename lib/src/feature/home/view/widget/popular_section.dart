@@ -50,7 +50,10 @@ class PopularSection extends StatelessWidget {
           Navigator.pushNamed(
             context,
             DetailsScreen.routeName,
-            arguments: IdNavigatorDataClass(id: result.id),
+            arguments: IdNavigatorDataClass(
+              id: result.id,
+              imagePath: result.posterPath ?? '',
+            ),
           );
         },
         child: ImageItemWidget(
@@ -77,6 +80,7 @@ class PopularSection extends StatelessWidget {
 // data class argument
 class IdNavigatorDataClass {
   final int? id;
+  final String imagePath;
 
-  IdNavigatorDataClass({required this.id});
+  IdNavigatorDataClass({required this.id, required this.imagePath});
 }

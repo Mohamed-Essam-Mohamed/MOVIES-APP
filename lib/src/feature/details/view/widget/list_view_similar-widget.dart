@@ -1,4 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,62 +9,49 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movies_app/src/animation_shimmer/list_view_shimmer.dart';
-import 'package:movies_app/src/feature/details/view/details_screen.dart';
-import 'package:movies_app/src/feature/home/view/widget/popular_section.dart';
+import 'package:movies_app/src/feature/details/view_modle/similar_view_model/similar_view_model_cubit.dart';
 import '../../../../constants/app_api_const.dart';
-import '../../view_model/recommended_view_model/recommended_view_model_cubit.dart';
 import '../../../../helper/dpi.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_text_styles.dart';
 
-class ListViewRecommendAndLikeWidget extends StatefulWidget {
-  const ListViewRecommendAndLikeWidget({
+class ListViewSimilarWidget extends StatelessWidget {
+  ListViewSimilarWidget({
+    required this.idMovies,
     super.key,
   });
+  final int idMovies;
 
-  @override
-  State<ListViewRecommendAndLikeWidget> createState() =>
-      _ListViewRecommendAndLikeWidgetState();
-}
-
-class _ListViewRecommendAndLikeWidgetState
-    extends State<ListViewRecommendAndLikeWidget> {
-  final RecommendedViewModelCubit viewModel = RecommendedViewModelCubit(
-    recommendRepository: injectRecommendRepository(),
-  );
-
+  SimilarViewModelCubit viewModel =
+      SimilarViewModelCubit(similarRepository: injectSimilarRepository());
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RecommendedViewModelCubit, RecommendedViewModelState>(
-      bloc: viewModel..getRecommend(),
+    return BlocBuilder<SimilarViewModelCubit, SimilarViewModelState>(
+      bloc: viewModel..getSimilarMovies(movieId: idMovies),
       builder: (context, state) {
-        if (state is RecommendedViewModelError) {
+        if (state is SimilarViewModelError) {
           return Center(
             child: Text(state.errorMessage),
           );
         }
-        if (state is RecommendedViewModelSuccess) {
+        if (state is SimilarViewModelSuccess) {
           return Expanded(
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      DetailsScreen.routeName,
-                      arguments: IdNavigatorDataClass(
-                        id: viewModel.movieRecommendList[index].id,
-                        imagePath:
-                            viewModel.movieRecommendList[index].posterPath ??
-                                "",
-                      ),
-                    );
-                  },
+                  // onTap: () {
+                  //   Navigator.pushNamed(
+                  //     context,
+                  //     DetailsScreen.routeName,
+                  //     arguments: IdNavigatorDataClass(
+                  //         id: viewModel.movieRecommendList[index].id),
+                  //   );
+                  // },
                   child: _showRecommendedForYouWidget(index),
                 );
               },
-              itemCount: viewModel.movieRecommendList.length,
+              itemCount: viewModel.similarMoviesList.length,
               separatorBuilder: (context, index) => Gap(14.w),
             ),
           );
@@ -95,7 +85,7 @@ class _ListViewRecommendAndLikeWidgetState
 
   Padding _ratingImageWidget({required int index}) {
     int rating = double.parse(
-      viewModel.movieRecommendList[index].voteAverage ?? "0.0",
+      viewModel.similarMoviesList[index].voteAverage ?? "0.0",
     ).toInt();
     return Padding(
       padding: EdgeInsets.all(5.h),
@@ -120,7 +110,7 @@ class _ListViewRecommendAndLikeWidgetState
     return Padding(
       padding: EdgeInsets.all(5.h),
       child: Text(
-        viewModel.movieRecommendList[index].title ?? "",
+        viewModel.similarMoviesList[index].title ?? "",
         style: AppStyles.textStyle14,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
@@ -138,7 +128,7 @@ class _ListViewRecommendAndLikeWidgetState
         children: [
           CachedNetworkImage(
             imageUrl:
-                "$imagePrefix${viewModel.movieRecommendList[index].posterPath}",
+                "$imagePrefix${viewModel.similarMoviesList[index].posterPath}",
             placeholder: (context, url) => Center(
               child: Lottie.asset('assets/lottie/loading.json'),
             ),
