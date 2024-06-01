@@ -125,4 +125,26 @@ class ApiManger {
       return Left(NetworkFailure(errorMessage: "No internet connection"));
     }
   }
+
+  Future<Either<Failure, MovieResponseDto>> getMoviesSearchQuery(
+      {required String query, required int page}) async {
+    final List<ConnectivityResult> connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi)) {
+      Uri url = Uri.parse(
+          "https://${apiBaseUrl}${apiSearchEndpoint}?query=$query&api_key=${apiKey}&page=$page");
+      var response = await http.get(url);
+
+      Map<String, dynamic> jsonData = jsonDecode(response.body);
+      var responseQuery = MovieResponseDto.fromJson(jsonData);
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(responseQuery);
+      } else {
+        return Left(ServerFailure(errorMessage: responseQuery.statusMessage));
+      }
+    } else {
+      return Left(NetworkFailure(errorMessage: "No internet connection"));
+    }
+  }
 }
