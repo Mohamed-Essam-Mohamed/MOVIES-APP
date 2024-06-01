@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'src/feature/browse/browse_screen.dart';
 import 'src/feature/home/view/home_screen.dart';
 import 'src/feature/search/view/search_screen.dart';
-import 'src/feature/watchlist/watchlist_screen.dart';
+import 'src/feature/watchlist/view/watchlist_screen.dart';
 import 'src/utils/app_colors.dart';
 
 class InitApp extends StatefulWidget {
