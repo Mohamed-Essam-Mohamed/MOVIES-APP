@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'src/feature/browse/browse_screen.dart';
+import 'src/feature/browse/view/browse_screen.dart';
 import 'src/feature/home/view/home_screen.dart';
 import 'src/feature/search/view/search_screen.dart';
 import 'src/feature/watchlist/view/watchlist_screen.dart';

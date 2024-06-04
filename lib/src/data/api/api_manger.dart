@@ -147,4 +147,25 @@ class ApiManger {
       return Left(NetworkFailure(errorMessage: "No internet connection"));
     }
   }
+
+  Future<Either<Failure, MovieResponseDto>> getGenreId(
+      {required int genreId, required int page}) async {
+    final List<ConnectivityResult> connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi)) {
+      Uri url = Uri.parse(
+          "https://${apiBaseUrl}${apiGenreIdEndPoint}&api_key=${apiKey}&page=$page&with_genres=$genreId");
+
+      var response = await http.get(url);
+      var genreResponse = MovieResponseDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(genreResponse);
+      } else {
+        return Left(ServerFailure(errorMessage: genreResponse.statusMessage));
+      }
+    } else {
+      return Left(NetworkFailure(errorMessage: "No internet connection"));
+    }
+  }
 }
