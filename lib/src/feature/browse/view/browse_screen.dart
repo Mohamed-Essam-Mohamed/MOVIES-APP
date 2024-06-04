@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:movies_app/src/feature/browse/view/widget/details_browse_page.dart';
 import 'widget/browes_item_widget.dart';
 import '../../../data/model/dataclass/genre_model.dart';
 import '../../../utils/app_text_styles.dart';
@@ -36,13 +37,22 @@ class BrowseScreen extends StatelessWidget {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     splashColor: Colors.transparent,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => DetailsBrowsePage(
+                            title: genreList[index].genreTitle,
+                            id: genreList[index].id,
+                          ),
+                        ),
+                      );
+                    },
                     child:
                         BrowseItemWidget(genre: genreList[index], index: index),
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
