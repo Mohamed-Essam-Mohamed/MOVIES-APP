@@ -1,3 +1,6 @@
+import 'package:movies_app/src/repository/browse_repository/browse_datasource_imp/browse_remote_datasource_imp.dart';
+import 'package:movies_app/src/repository/browse_repository/browse_repository_contract.dart';
+import 'package:movies_app/src/repository/browse_repository/browse_repository_imp/browse_repository_imp.dart';
 import 'package:movies_app/src/repository/details_repository/details_datasource_imp/details_remote_datasource_imp.dart';
 import 'package:movies_app/src/repository/details_repository/details_repository_contract.dart';
 import 'package:movies_app/src/repository/details_repository/details_repository_imp/details_repositroy_imp.dart';
@@ -74,4 +77,12 @@ SearchRepository injectSearchRepository() {
 
 SearchRemoteDataSource injectSearchRemoteDataSource() =>
     SearchRemoteDataSourceImp(apiManger: ApiManger.instance);
-//? 
+//? Browse dependency injection
+BrowseRemoteDataSource injectBrowseRemoteDataSource() {
+  return BrowseRemoteDataSourceImp(apiManger: ApiManger.instance);
+}
+
+BrowseRepository injectBrowseRepository() {
+  return BrowseRepositoryImp(
+      browseRemoteDataSource: injectBrowseRemoteDataSource());
+}

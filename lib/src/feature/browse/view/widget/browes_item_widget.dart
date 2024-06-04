@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../data/model/dataclass/genre_model.dart';
-import '../../../utils/app_text_styles.dart';
+import '../../../../data/model/dataclass/genre_model.dart';
+import '../../../../utils/app_text_styles.dart';
 
-class BrowesItemWidget extends StatelessWidget {
+class BrowseItemWidget extends StatelessWidget {
   GenreDM genre;
   int index;
-  BrowesItemWidget({required this.genre, required this.index});
+  BrowseItemWidget({required this.genre, required this.index});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
