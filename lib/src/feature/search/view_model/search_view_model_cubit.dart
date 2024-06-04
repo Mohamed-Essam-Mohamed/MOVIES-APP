@@ -10,10 +10,14 @@ class SearchViewModelCubit extends Cubit<SearchViewModelState> {
       : super(SearchViewModelInitial());
   SearchRepository searchRepository;
   List<MovieDetailsResponseDto>? moviesList = [];
+  List<MovieDetailsResponseDto>? moviesListClear = [];
+
+  int page = 1;
+
   getSearchMovies({required String query}) async {
     emit(SearchViewModelLoading());
     var either =
-        await searchRepository.getMoviesSearchQuery(query: query, page: 1);
+        await searchRepository.getMoviesSearchQuery(query: query, page: page);
 
     either.fold(
       (error) {
@@ -26,6 +30,11 @@ class SearchViewModelCubit extends Cubit<SearchViewModelState> {
           emit(SearchViewModelEmpty());
         } else {
           moviesList = response.results ?? [];
+          // clear null  poster path
+          moviesListClear = moviesList
+              ?.where((element) => element.posterPath != null)
+              .toList();
+
           emit(SearchViewModelSuccess(moviesList: response.results));
         }
       },
