@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:movies_app/src/data/model/response/movie_details_respons_dto.dart';
 import 'package:movies_app/src/feature/details/view_modle/details_view_model/details_view_model_cubit.dart';
 import 'package:movies_app/src/feature/home/view/widget/image_item_widget.dart';
+import 'package:movies_app/src/feature/watchlist/view_model/watch_list_view_model_cubit.dart';
 import 'package:movies_app/src/helper/dpi.dart';
 import 'package:movies_app/src/utils/app_colors.dart';
 import 'package:movies_app/src/utils/app_text_styles.dart';
@@ -75,6 +76,13 @@ class _DetailsMoviesWidgetState extends State<DetailsMoviesWidget> {
             imagePath:
                 state.movieDetailsResponseDto.belongsToCollection?.posterPath ??
                     imagePath,
+            moviesWatchListDataBase: MoviesWatchListDataBase(
+              id: state.movieDetailsResponseDto.id,
+              title: state.movieDetailsResponseDto.title,
+              posterPath: state.movieDetailsResponseDto.posterPath,
+              releaseDate: state.movieDetailsResponseDto.releaseDate,
+              voteAverage: state.movieDetailsResponseDto.voteAverage,
+            ),
           ),
           Gap(10.w),
           Expanded(

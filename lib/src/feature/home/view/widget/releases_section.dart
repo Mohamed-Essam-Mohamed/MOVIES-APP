@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:movies_app/src/animation_shimmer/list_view_shimmer.dart';
 import 'package:movies_app/src/feature/details/view/details_screen.dart';
 import 'package:movies_app/src/feature/home/view/widget/popular_section.dart';
+import 'package:movies_app/src/feature/watchlist/view_model/watch_list_view_model_cubit.dart';
 import 'image_item_widget.dart';
 import '../../view_model/releases_view_model/releases_view_model_cubit.dart';
 import '../../../../helper/dpi.dart';
@@ -77,6 +78,13 @@ class _ListViewNewReleasesWidgetState extends State<ListViewNewReleasesWidget> {
                 },
                 child: ImageItemWidget(
                   imagePath: viewModel.movieReleaseList[index].posterPath ?? "",
+                  moviesWatchListDataBase: MoviesWatchListDataBase(
+                    id: viewModel.movieReleaseList[index].id,
+                    title: viewModel.movieReleaseList[index].title,
+                    posterPath: viewModel.movieReleaseList[index].posterPath,
+                    releaseDate: viewModel.movieReleaseList[index].releaseDate,
+                    voteAverage: viewModel.movieReleaseList[index].voteAverage,
+                  ),
                 ),
               ),
               separatorBuilder: (context, index) => SizedBox(width: 15.w),

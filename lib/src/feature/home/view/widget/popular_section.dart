@@ -6,6 +6,7 @@ import 'package:movies_app/src/feature/details/view/details_screen.dart';
 
 import '../../../../constants/app_api_const.dart';
 import '../../../../data/model/response/movie_details_respons_dto.dart';
+import '../../../watchlist/view_model/watch_list_view_model_cubit.dart';
 import 'image_item_widget.dart';
 import 'title_image_widget.dart';
 
@@ -58,6 +59,13 @@ class PopularSection extends StatelessWidget {
         },
         child: ImageItemWidget(
           imagePath: result.posterPath ?? '',
+          moviesWatchListDataBase: MoviesWatchListDataBase(
+            id: result.id,
+            title: result.title,
+            posterPath: result.posterPath,
+            releaseDate: result.releaseDate,
+            voteAverage: result.voteAverage,
+          ),
         ),
       ),
     );

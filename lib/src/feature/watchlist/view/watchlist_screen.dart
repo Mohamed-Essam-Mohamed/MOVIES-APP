@@ -4,12 +4,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
+import 'package:movies_app/src/feature/watchlist/view_model/watch_list_view_model_cubit.dart';
 
 import '../../../constants/app_api_const.dart';
 
-class WatchlistScreen extends StatelessWidget {
+class WatchlistScreen extends StatefulWidget {
+  @override
+  State<WatchlistScreen> createState() => _WatchlistScreenState();
+}
+
+class _WatchlistScreenState extends State<WatchlistScreen> {
+  @override
   @override
   Widget build(BuildContext context) {
+    var cubitWatchList = WatchListViewModelCubit.get(context);
+    if (cubitWatchList.movieDetailsResponseDto.isEmpty) {
+      cubitWatchList.getAllData();
+    }
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.5),
@@ -26,9 +37,29 @@ class WatchlistScreen extends StatelessWidget {
                 height: 26.5 / 22, // line-height / font-size
               ),
             ),
-            Gap(42.5.h),
-            // WatchListItemWidget(),
-            Divider(color: Colors.white.withOpacity(0.2)),
+
+            //
+            // ,
+            Expanded(
+              child: ListView.separated(
+                itemBuilder: (context, index) => WatchListItemWidget(
+                  imagePath: cubitWatchList
+                          .movieDetailsResponseDto[index].posterPath ??
+                      "",
+                  title:
+                      cubitWatchList.movieDetailsResponseDto[index].title ?? "",
+                  date: cubitWatchList
+                          .movieDetailsResponseDto[index].releaseDate ??
+                      "",
+                  description:
+                      cubitWatchList.movieDetailsResponseDto[index].overview ??
+                          "",
+                ),
+                separatorBuilder: (context, index) =>
+                    Divider(color: Colors.white.withOpacity(0.2)),
+                itemCount: cubitWatchList.movieDetailsResponseDto.length,
+              ),
+            )
           ],
         ),
       ),
