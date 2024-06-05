@@ -3,23 +3,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:movies_app/src/feature/watchlist/view_model/watch_list_view_model_cubit.dart';
 import '../../../../constants/app_api_const.dart';
 
-class ImageItemWidget extends StatelessWidget {
-  const ImageItemWidget({
+class ImageItemWidget extends StatefulWidget {
+  ImageItemWidget({
     super.key,
     required this.imagePath,
+    required this.moviesWatchListDataBase,
   });
   final String imagePath;
+  MoviesWatchListDataBase moviesWatchListDataBase;
 
   @override
+  State<ImageItemWidget> createState() => _ImageItemWidgetState();
+}
+
+class _ImageItemWidgetState extends State<ImageItemWidget> {
+  @override
   Widget build(BuildContext context) {
+    var cubit = WatchListViewModelCubit.get(context);
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.r),
       child: Stack(
         children: [
           CachedNetworkImage(
-            imageUrl: "$imagePrefix${imagePath}",
+            imageUrl: "$imagePrefix${widget.imagePath}",
             placeholder: (context, url) => Center(
               child: Lottie.asset('assets/lottie/loading.json'),
             ),
@@ -28,11 +38,24 @@ class ImageItemWidget extends StatelessWidget {
             width: 129.w,
             height: 199.h,
           ),
-          SvgPicture.asset(
-            'assets/svg_icons/bookmark.svg',
-            width: 27.w,
-            height: 36.h,
-            fit: BoxFit.fill,
+          InkWell(
+            onTap: () {
+              if (cubit.checkWatchListExist(
+                  widget.moviesWatchListDataBase.id ?? 1000)) {
+                cubit.removeFromWatchList(widget.moviesWatchListDataBase);
+              } else {
+                cubit.addToWatchList(widget.moviesWatchListDataBase);
+              }
+              setState(() {});
+            },
+            child: SvgPicture.asset(
+              cubit.checkWatchListExist(widget.moviesWatchListDataBase.id!)
+                  ? 'assets/svg_icons/bookmark-selected.svg'
+                  : 'assets/svg_icons/bookmark.svg',
+              width: 28.w,
+              height: 36.h,
+              fit: BoxFit.fill,
+            ),
           ),
         ],
       ),

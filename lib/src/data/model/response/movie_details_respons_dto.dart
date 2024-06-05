@@ -1,27 +1,37 @@
-class MovieDetailsResponseDto {
+import 'package:hive/hive.dart';
+
+part 'movie_details_respons_dto.g.dart';
+
+@HiveType(typeId: 1)
+class MovieDetailsResponseDto extends HiveObject {
   bool? adult;
   String? backdropPath;
   BelongsToCollection? belongsToCollection;
   int? budget;
   List<Genres>? genres;
   String? homepage;
+  @HiveField(0)
   int? id;
   String? imdbId;
   String? originalLanguage;
   String? originalTitle;
   String? overview;
   double? popularity;
+  @HiveField(1)
   String? posterPath;
   List<ProductionCompanies>? productionCompanies;
   List<ProductionCountries>? productionCountries;
+  @HiveField(2)
   String? releaseDate;
   int? revenue;
   int? runtime;
   List<SpokenLanguages>? spokenLanguages;
   String? status;
   String? tagline;
+  @HiveField(3)
   String? title;
   bool? video;
+  @HiveField(4)
   String? voteAverage;
   int? voteCount;
   bool? success;
