@@ -9,6 +9,7 @@ import 'package:movies_app/src/animation_shimmer/list_view_shimmer.dart';
 import 'package:movies_app/src/feature/details/view/details_screen.dart';
 import 'package:movies_app/src/feature/home/view/widget/popular_section.dart';
 import '../../../../constants/app_api_const.dart';
+import '../../../watchlist/view_model/watch_list_view_model_cubit.dart';
 import '../../view_model/recommended_view_model/recommended_view_model_cubit.dart';
 import '../../../../helper/dpi.dart';
 import '../../../../utils/app_colors.dart';
@@ -90,7 +91,7 @@ class _ListViewRecommendAndLikeWidgetState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _imageItemReleasesWidget(index: index),
+          ImageItemReleasesWidget(index: index, viewModel: viewModel),
           _titleNameImageWidget(index: index),
           _dateImageWidget(index),
           const Spacer(),
@@ -161,8 +162,23 @@ class _ListViewRecommendAndLikeWidgetState
       ),
     );
   }
+}
 
-  ClipRRect _imageItemReleasesWidget({required int index}) {
+class ImageItemReleasesWidget extends StatefulWidget {
+  const ImageItemReleasesWidget(
+      {super.key, required this.index, required this.viewModel});
+  final int index;
+  final RecommendedViewModelCubit viewModel;
+
+  @override
+  State<ImageItemReleasesWidget> createState() =>
+      _ImageItemReleasesWidgetState();
+}
+
+class _ImageItemReleasesWidgetState extends State<ImageItemReleasesWidget> {
+  @override
+  Widget build(BuildContext context) {
+    final cubit = WatchListViewModelCubit.get(context);
     return ClipRRect(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(10.r),
@@ -172,7 +188,7 @@ class _ListViewRecommendAndLikeWidgetState
         children: [
           CachedNetworkImage(
             imageUrl:
-                "$imagePrefix${viewModel.movieRecommendList[index].posterPath}",
+                "$imagePrefix${widget.viewModel.movieRecommendList[widget.index].posterPath}",
             placeholder: (context, url) => Center(
               child: Lottie.asset('assets/lottie/loading.json'),
             ),
@@ -181,13 +197,30 @@ class _ListViewRecommendAndLikeWidgetState
             width: double.infinity,
             height: 150.h,
           ),
-          SvgPicture.asset(
-            'assets/svg_icons/bookmark.svg',
-            width: 27.w,
-            height: 36.h,
+          InkWell(
+            onTap: () {
+              if (cubit.checkWatchListExist(
+                  widget.viewModel.movieRecommendList[widget.index].id!)) {
+                //! delete object from database
+              } else {
+                cubit.addToWatchList(
+                    widget.viewModel.movieRecommendList[widget.index]);
+              }
+              setState(() {});
+            },
+            child: SvgPicture.asset(
+              cubit.checkWatchListExist(
+                      widget.viewModel.movieRecommendList[widget.index].id!)
+                  ? 'assets/svg_icons/bookmark-selected.svg'
+                  : 'assets/svg_icons/bookmark.svg',
+              width: 28.w,
+              height: 36.h,
+              fit: BoxFit.fill,
+            ),
           ),
         ],
       ),
     );
+    ;
   }
 }

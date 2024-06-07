@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               Gap(40.h),
               const ReleasesSection(),
               Gap(30.h),
-              RecommendedSection(),
+              const RecommendedSection(),
             ],
           ),
         ),

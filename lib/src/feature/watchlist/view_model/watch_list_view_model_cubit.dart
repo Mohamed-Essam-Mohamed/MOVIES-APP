@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -20,13 +18,12 @@ class WatchListViewModelCubit extends Cubit<WatchListViewModelState> {
   //? function to get all data in hive
   void getAllData() {
     emit(WatchListViewModelLoading());
-    for (var element in watchListDataBase.values) {
-      movieDetailsResponseDto.add(element);
-    }
-    emit(WatchListViewModelInitial());
+    movieDetailsResponseDto = watchListDataBase.values.toList();
+    emit(WatchListViewModelSuccess());
   }
 
   bool checkWatchListExist(int id) {
+    getAllData();
     for (var element in watchListDataBase.values) {
       if (element.id == id) {
         return true;
@@ -35,16 +32,19 @@ class WatchListViewModelCubit extends Cubit<WatchListViewModelState> {
     return false;
   }
 
-  void removeFromWatchList(MoviesWatchListDataBase movieDetailsResponseDto) {
+  //? function to Delete object from database in hive
+  void deleteOne(MovieDetailsResponseDto movieDetailsResponseDto) {
     emit(WatchListViewModelLoading());
-    watchListDataBase.delete(movieDetailsResponseDto);
-    emit(WatchListViewModelInitial());
+    watchListDataBase.delete(movieDetailsResponseDto.id);
+    getAllData();
+    emit(WatchListViewModelSuccess());
   }
 
-  void addToWatchList(MoviesWatchListDataBase movieDetailsResponseDto) {
+  void addToWatchList(MovieDetailsResponseDto movieDetailsResponseDto) {
     emit(WatchListViewModelLoading());
     watchListDataBase.add(movieDetailsResponseDto);
-    emit(WatchListViewModelInitial());
+    getAllData();
+    emit(WatchListViewModelSuccess());
   }
 }
 

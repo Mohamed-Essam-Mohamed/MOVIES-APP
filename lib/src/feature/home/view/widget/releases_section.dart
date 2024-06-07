@@ -71,9 +71,10 @@ class _ListViewNewReleasesWidgetState extends State<ListViewNewReleasesWidget> {
                     context,
                     DetailsScreen.routeName,
                     arguments: IdNavigatorDataClass(
-                        id: viewModel.movieReleaseList[index].id,
-                        imagePath:
-                            viewModel.movieReleaseList[index].posterPath ?? ""),
+                      id: viewModel.movieReleaseList[index].id,
+                      imagePath:
+                          viewModel.movieReleaseList[index].posterPath ?? "",
+                    ),
                   );
                 },
                 child: ImageItemWidget(
