@@ -16,10 +16,10 @@ class InitApp extends StatefulWidget {
 
 class _InitAppState extends State<InitApp> {
   List<Widget> widgetList = [
-    HomeScreen(),
+    const HomeScreen(),
     SearchScreen(),
     BrowseScreen(),
-    WatchlistScreen()
+    WatchListScreen()
   ];
 
   int index = 0;
@@ -77,7 +77,7 @@ class _InitAppState extends State<InitApp> {
               width: 23.w,
               color: index == 3 ? AppColors.yellowColor : Colors.grey,
             ),
-            label: 'Watchlist',
+            label: 'WatchList',
           ),
         ],
       ),

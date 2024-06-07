@@ -15,10 +15,9 @@ import 'src/utils/app_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(
-      MovieDetailsResponseDtoAdapter());
+  Hive.registerAdapter(MovieDetailsResponseDtoAdapter());
   await Hive.openBox<MovieDetailsResponseDto>(HiveConst.moviesWatchList);
-  runApp(MoviesApp());
+  runApp(const MoviesApp());
 }
 
 class MoviesApp extends StatelessWidget {

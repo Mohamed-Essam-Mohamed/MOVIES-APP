@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movies_app/src/feature/browse/view_model/browse_view_model_cubit.dart';
-import 'package:movies_app/src/feature/watchlist/view/watchlist_screen.dart';
+import 'package:movies_app/src/feature/watchlist/view/widget/watch_list_item_widget.dart';
 import 'package:movies_app/src/helper/dpi.dart';
 import 'package:movies_app/src/utils/app_text_styles.dart';
 
@@ -42,7 +42,10 @@ class DetailsBrowsePage extends StatelessWidget {
                   imagePath: viewModel.moviesListClear?[index].posterPath ?? "",
                   title: viewModel.moviesListClear?[index].title ?? "",
                   date: viewModel.moviesListClear?[index].releaseDate ?? "",
-                  description: "",
+                  rating: viewModel.moviesListClear?[index].voteAverage ?? "",
+                  language:
+                      viewModel.moviesListClear![index].originalLanguage ?? "",
+                  id: viewModel.moviesListClear?[index].id ?? 0,
                 ),
                 separatorBuilder: (context, index) =>
                     Divider(color: Colors.white.withOpacity(0.2)),

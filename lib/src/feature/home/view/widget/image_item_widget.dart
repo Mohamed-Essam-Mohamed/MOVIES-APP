@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:movies_app/src/data/model/response/movie_details_respons_dto.dart';
 import 'package:movies_app/src/feature/watchlist/view_model/watch_list_view_model_cubit.dart';
 import '../../../../constants/app_api_const.dart';
 
@@ -13,7 +14,7 @@ class ImageItemWidget extends StatefulWidget {
     required this.moviesWatchListDataBase,
   });
   final String imagePath;
-  MoviesWatchListDataBase moviesWatchListDataBase;
+  MovieDetailsResponseDto moviesWatchListDataBase;
 
   @override
   State<ImageItemWidget> createState() => _ImageItemWidgetState();
@@ -42,7 +43,7 @@ class _ImageItemWidgetState extends State<ImageItemWidget> {
             onTap: () {
               if (cubit.checkWatchListExist(
                   widget.moviesWatchListDataBase.id ?? 1000)) {
-                cubit.removeFromWatchList(widget.moviesWatchListDataBase);
+                // cubit.deleteOne(widget.moviesWatchListDataBase);
               } else {
                 cubit.addToWatchList(widget.moviesWatchListDataBase);
               }

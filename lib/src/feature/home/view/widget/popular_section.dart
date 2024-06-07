@@ -31,13 +31,18 @@ class PopularSection extends StatelessWidget {
   }
 
   Positioned _positionedTitleImageWidget() {
+    double rating = double.parse(result.voteAverage ?? '0.0');
+    String formattedRating = rating.toStringAsFixed(1);
     return Positioned(
-      top: 220.h,
-      left: 170.w,
+      top: 225.h,
+      left: 160.w,
       child: TitleImageWidget(
-        data: result.releaseDate ?? '',
-        rating: double.parse(result.voteAverage ?? '0.0').toInt(),
-        title: result.title ?? '',
+        data: result.releaseDate ?? '2000',
+        // format rating
+        rating: formattedRating,
+        title: result.title!,
+        language: result.originalLanguage ?? 'en',
+        ratingCount: result.voteCount ?? 500,
       ),
     );
   }

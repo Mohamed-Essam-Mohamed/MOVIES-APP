@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
+import 'package:movies_app/src/animation_shimmer/popular_shimmer.dart';
 import 'package:movies_app/src/data/model/response/movie_details_respons_dto.dart';
 import 'package:movies_app/src/feature/details/view_modle/details_view_model/details_view_model_cubit.dart';
 import 'package:movies_app/src/feature/home/view/widget/image_item_widget.dart';
@@ -58,10 +59,7 @@ class _DetailsMoviesWidgetState extends State<DetailsMoviesWidget> {
             ),
           );
         }
-        return Center(
-          child: Lottie.asset('assets/lottie/loading.json',
-              width: 100, height: 100),
-        );
+        return const BackGroundImageShimmer();
       },
     );
   }

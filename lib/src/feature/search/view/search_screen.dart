@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movies_app/src/feature/search/view_model/search_view_model_cubit.dart';
 import 'package:movies_app/src/feature/watchlist/view/watchlist_screen.dart';
+import 'package:movies_app/src/feature/watchlist/view/widget/watch_list_item_widget.dart';
 import 'package:movies_app/src/helper/dpi.dart';
 import 'widget/custom_text_form_widget.dart';
 
@@ -60,9 +61,13 @@ class _SearchScreenState extends State<SearchScreen> {
                             date:
                                 viewModel.moviesListClear![index].releaseDate ??
                                     "",
-                            description: viewModel
-                                    .moviesListClear![index].originalTitle ??
-                                "",
+                            language: viewModel
+                                    .moviesListClear![index].originalLanguage ??
+                                "en",
+                            rating:
+                                viewModel.moviesListClear![index].voteAverage ??
+                                    "",
+                            id: viewModel.moviesListClear![index].id ?? 0,
                           ),
                           separatorBuilder: (context, index) =>
                               Divider(color: Colors.white.withOpacity(0.2)),

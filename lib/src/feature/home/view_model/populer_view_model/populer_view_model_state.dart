@@ -1,18 +1,18 @@
 part of 'populer_view_model_cubit.dart';
 
 @immutable
-abstract class PopulerViewModelState {}
+abstract class PopularViewModelState {}
 
-class PopulerViewModelInitial extends PopulerViewModelState {}
+class PopularViewModelInitial extends PopularViewModelState {}
 
-class PopulerViewModelLoading extends PopulerViewModelState {}
+class PopularViewModelLoading extends PopularViewModelState {}
 
-class PopulerViewModelError extends PopulerViewModelState {
+class PopularViewModelError extends PopularViewModelState {
   final String? errorMessage;
-  PopulerViewModelError({required this.errorMessage});
+  PopularViewModelError({required this.errorMessage});
 }
 
-class PopulerViewModelSuccess extends PopulerViewModelState {
+class PopularViewModelSuccess extends PopularViewModelState {
   final List<MovieDetailsResponseDto>? moviePopularList;
-  PopulerViewModelSuccess({required this.moviePopularList});
+  PopularViewModelSuccess({required this.moviePopularList});
 }

@@ -6,6 +6,9 @@ import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_text_styles.dart';
 
 class RecommendedSection extends StatelessWidget {
+  const RecommendedSection({
+    Key? key,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
