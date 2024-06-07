@@ -8,12 +8,12 @@ import 'package:movies_app/src/feature/watchlist/view_model/watch_list_view_mode
 
 import '../../../constants/app_api_const.dart';
 
-class WatchlistScreen extends StatefulWidget {
+class WatchListScreen extends StatefulWidget {
   @override
-  State<WatchlistScreen> createState() => _WatchlistScreenState();
+  State<WatchListScreen> createState() => _WatchListScreenState();
 }
 
-class _WatchlistScreenState extends State<WatchlistScreen> {
+class _WatchListScreenState extends State<WatchListScreen> {
   @override
   @override
   Widget build(BuildContext context) {
@@ -37,9 +37,6 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                 height: 26.5 / 22, // line-height / font-size
               ),
             ),
-
-            //
-            // ,
             Expanded(
               child: ListView.separated(
                 itemBuilder: (context, index) => WatchListItemWidget(

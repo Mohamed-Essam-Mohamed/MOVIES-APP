@@ -10,9 +10,13 @@ class TitleImageWidget extends StatelessWidget {
     required this.data,
     required this.rating,
     required this.title,
+    required this.language,
+    required this.ratingCount,
   });
   final String? title, data;
-  final int rating;
+  final String rating;
+  final String language;
+  final int ratingCount;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +33,27 @@ class TitleImageWidget extends StatelessWidget {
             maxLines: 1,
           ),
           Gap(5.h),
-          Text(
-            data ?? '',
-            style: AppStyles.textStyle14,
+          Row(
+            children: [
+              Text(
+                "Language ($language)",
+                style: AppStyles.textStyle14,
+              ),
+              Gap(20.w),
+              Text(
+                "Year ($data)",
+                style: AppStyles.textStyle14,
+              ),
+            ],
           ),
           Gap(5.h),
           Row(
             children: [
+              Text(
+                "Rating",
+                style: AppStyles.textStyle14,
+              ),
+              Gap(5.w),
               Icon(
                 Icons.star,
                 color: AppColors.yellowColor,
@@ -44,6 +62,11 @@ class TitleImageWidget extends StatelessWidget {
               Gap(5.h),
               Text(
                 rating.toString(),
+                style: AppStyles.textStyle14,
+              ),
+              Gap(6.w),
+              Text(
+                "($ratingCount)",
                 style: AppStyles.textStyle14,
               ),
             ],

@@ -5,24 +5,24 @@ import '../../../../repository/popular_repository/popular_repository_contract.da
 
 part 'populer_view_model_state.dart';
 
-class PopulerViewModelCubit extends Cubit<PopulerViewModelState> {
-  PopulerViewModelCubit({required this.popularRepository})
-      : super(PopulerViewModelInitial());
+class PopularViewModelCubit extends Cubit<PopularViewModelState> {
+  PopularViewModelCubit({required this.popularRepository})
+      : super(PopularViewModelInitial());
   PopularRepository popularRepository;
-  PopulerViewModelCubit get(context) => BlocProvider.of(context);
+  PopularViewModelCubit get(context) => BlocProvider.of(context);
 
   List<MovieDetailsResponseDto> moviePopularList = [];
 
   void getAllPopular() async {
-    emit(PopulerViewModelLoading());
+    emit(PopularViewModelLoading());
     final popular = await popularRepository.getPopularMovies();
     popular.fold(
       (l) {
-        emit(PopulerViewModelError(errorMessage: l.errorMessage));
+        emit(PopularViewModelError(errorMessage: l.errorMessage));
       },
       (r) {
         moviePopularList = r.results ?? [];
-        emit(PopulerViewModelSuccess(moviePopularList: moviePopularList));
+        emit(PopularViewModelSuccess(moviePopularList: moviePopularList));
       },
     );
   }
