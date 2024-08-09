@@ -25,11 +25,12 @@ using different endpoints and he can view the website of the article, the app al
 
 
 ## 📁 Files Structure
-![files-structure](https://github.com/Mohamed-Essam-Mohamed/news_app/assets/152906492/1cafaddc-99e5-4553-a0ea-8395bf40dad9)
+![structure-movies](https://github.com/user-attachments/assets/0bd4b1f9-0355-4ca1-9dc1-5f3ee827378b)
 
 
 ## 📱 UI
-![ui_news_app](https://github.com/Mohamed-Essam-Mohamed/NEWS-APP/assets/152906492/19d1cde3-ded6-429d-ac94-07f6393cb3c8)
+![movies-screens](https://github.com/user-attachments/assets/31652e47-96ef-4817-a27e-ef606bb8b6ee)
+
 
 
 
