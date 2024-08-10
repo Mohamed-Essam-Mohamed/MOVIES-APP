@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movies_app/src/constants/app_api_const.dart';
+import 'package:movies_app/src/data/model/response/movie_details_respons_dto.dart';
 import 'package:movies_app/src/utils/app_colors.dart';
 import 'package:movies_app/src/utils/app_text_styles.dart';
 
@@ -15,24 +17,16 @@ import '../../view_model/watch_list_view_model_cubit.dart';
 class WatchListItemWidget extends StatelessWidget {
   const WatchListItemWidget({
     super.key,
-    required this.imagePath,
-    required this.title,
-    required this.date,
-    required this.rating,
-    required this.id,
-    required this.language,
+    required this.moviesWatchListDataBase,
   });
-  final String imagePath;
-  final String language;
-  final String title;
-  final String date;
-  final String rating;
 
-  final int id;
-
+  final MovieDetailsResponseDto moviesWatchListDataBase;
   @override
   Widget build(BuildContext context) {
-    var cubit = WatchListViewModelCubit.get(context);
+    var cubit = BlocProvider.of<WatchListViewModelCubit>(context, listen: true);
+
+    bool isWatchList =
+        cubit.moviesDataBase.keys.contains(moviesWatchListDataBase.id!);
     return InkWell(
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
@@ -42,8 +36,8 @@ class WatchListItemWidget extends StatelessWidget {
           context,
           DetailsScreen.routeName,
           arguments: IdNavigatorDataClass(
-            id: id,
-            imagePath: imagePath,
+            id: moviesWatchListDataBase.id,
+            imagePath: moviesWatchListDataBase.posterPath ?? "",
           ),
         );
       },
@@ -53,7 +47,51 @@ class WatchListItemWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _watchListImageWidget(cubit),
+            Stack(
+              children: [
+                SizedBox(
+                  width: 150,
+                  height: 95,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          "${imagePrefix}${moviesWatchListDataBase.posterPath!}",
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      placeholder: (context, url) => Center(
+                        child: Lottie.asset('assets/lottie/loading.json'),
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  child: SizedBox(
+                    width: 27,
+                    height: 36,
+                    child: InkWell(
+                      onTap: () {
+                        cubit.deleteOrAddWatchList(
+                          moviesWatchListDataBase.id!,
+                          moviesWatchListDataBase,
+                        );
+                      },
+                      child: SvgPicture.asset(
+                        isWatchList
+                            ? 'assets/svg_icons/bookmark-selected.svg'
+                            : 'assets/svg_icons/bookmark.svg',
+                        width: 28.w,
+                        height: 36.h,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Gap(10.h),
             _watchListDescriptionWidget(),
           ],
@@ -63,7 +101,7 @@ class WatchListItemWidget extends StatelessWidget {
   }
 
   Expanded _watchListDescriptionWidget() {
-    double updateRating = double.parse(rating);
+    double updateRating = double.parse(moviesWatchListDataBase.voteAverage!);
     String ratingText = updateRating.toStringAsFixed(1);
     return Expanded(
       child: Column(
@@ -71,7 +109,7 @@ class WatchListItemWidget extends StatelessWidget {
         children: [
           Gap(10.h),
           Text(
-            title,
+            moviesWatchListDataBase.title!,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 15,
@@ -83,7 +121,7 @@ class WatchListItemWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                "Language: ($language)",
+                "Language: (${moviesWatchListDataBase.originalLanguage ?? 'en'})",
                 style: TextStyle(
                   color: Colors.white.withOpacity(0.67),
                   fontSize: 13,
@@ -93,7 +131,7 @@ class WatchListItemWidget extends StatelessWidget {
               ),
               Gap(7.h),
               Text(
-                "Year: ($date)",
+                "Year: (${moviesWatchListDataBase.releaseDate!})",
                 style: TextStyle(
                   color: Colors.white.withOpacity(0.67),
                   fontSize: 13,
@@ -125,47 +163,6 @@ class WatchListItemWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Stack _watchListImageWidget(WatchListViewModelCubit cubit) {
-    return Stack(
-      children: [
-        SizedBox(
-          width: 150,
-          height: 95,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: CachedNetworkImage(
-              imageUrl: "${imagePrefix}${imagePath}",
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-              placeholder: (context, url) => Center(
-                child: Lottie.asset('assets/lottie/loading.json'),
-              ),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        Positioned(
-          top: 0,
-          left: 0,
-          child: SizedBox(
-            width: 27,
-            height: 36,
-            child: InkWell(
-              onTap: () {},
-              child: SvgPicture.asset(
-                cubit.checkWatchListExist(id)
-                    ? 'assets/svg_icons/bookmark-selected.svg'
-                    : 'assets/svg_icons/bookmark.svg',
-                width: 28.w,
-                height: 36.h,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

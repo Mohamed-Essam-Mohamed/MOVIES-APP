@@ -35,7 +35,7 @@ class MovieDetailsResponseDto extends HiveObject {
   String? voteAverage;
   int? voteCount;
   bool? success;
-  bool? statusCode;
+  num? statusCode;
   String? statusMessage;
 
   MovieDetailsResponseDto({
@@ -110,7 +110,7 @@ class MovieDetailsResponseDto extends HiveObject {
       });
     }
 
-    releaseDate = getYear(json['release_date']);
+    releaseDate = getYear(json["release_date"]);
 
     runtime = json['runtime'];
 

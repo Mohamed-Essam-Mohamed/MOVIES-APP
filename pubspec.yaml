@@ -29,13 +29,18 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cached_network_image: ^3.3.1
-  carousel_slider: ^4.2.1
+  carousel_slider:
+    git:
+      url: https://github.com/sampaio96/flutter_carousel_slider.git
+      ref: master
   connectivity_plus: ^6.0.3
   cupertino_icons: ^1.0.6
   dartz: ^0.10.1
+  dio: ^5.5.0+1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.5
+  flutter_offline: ^4.0.0
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.10+1
   gap: ^3.0.1

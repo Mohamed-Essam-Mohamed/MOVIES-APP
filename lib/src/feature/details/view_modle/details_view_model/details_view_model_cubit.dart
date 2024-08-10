@@ -12,7 +12,7 @@ class DetailsViewModelCubit extends Cubit<DetailsViewModelState> {
   }) : super(DetailsViewModelInitial());
   DetailsRepository detailsRepository;
 
-  getDetailsMovies({required int movieId}) async {
+  Future<void> getDetailsMovies({required int movieId}) async {
     emit(DetailsViewModelLoading());
     var either = await detailsRepository.getDetailsMovies(movieId: movieId);
     either.fold(

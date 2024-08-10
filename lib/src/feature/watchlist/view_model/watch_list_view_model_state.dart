@@ -10,3 +10,5 @@ class WatchListViewModelLoading extends WatchListViewModelState {}
 class WatchListViewModelSuccess extends WatchListViewModelState {}
 
 class WatchListViewModelError extends WatchListViewModelState {}
+
+class WatchListViewModelEmpty extends WatchListViewModelState {}

@@ -30,6 +30,13 @@ class _DetailsMoviesWidgetState extends State<DetailsMoviesWidget> {
   DetailsViewModelCubit viewModel =
       DetailsViewModelCubit(detailsRepository: injectDetailsRepository());
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    viewModel.getDetailsMovies(movieId: widget.idMovie);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<DetailsViewModelCubit, DetailsViewModelState>(
       bloc: viewModel..getDetailsMovies(movieId: widget.idMovie),

@@ -30,6 +30,7 @@ class ApiManger {
 
       var popularResponse =
           MovieResponseDto.fromJson(jsonDecode(response.body));
+
       if (response.statusCode == 200) {
         return Right(popularResponse);
       } else {
@@ -71,7 +72,7 @@ class ApiManger {
       });
       var response = await http.get(url);
       var popularResponse =
-          MovieResponseDto.fromJson(jsonDecode(response.body));
+          MovieResponseDto.fromJson(await jsonDecode(response.body));
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return Right(popularResponse);
       } else {
@@ -89,11 +90,11 @@ class ApiManger {
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi)) {
       Uri url = Uri.parse(
-          "https://${apiBaseUrl}${apiMovieEndPoint}/${movieId}?api_key=${apiKey}");
+          "https://${apiBaseUrl}${apiMovieEndPoint}${movieId}?api_key=${apiKey}");
 
       var response = await http.get(url);
-      var detailsResponse =
-          MovieDetailsResponseDto.fromJson(jsonDecode(response.body));
+      Map<String, dynamic> jsonData = await jsonDecode(response.body);
+      var detailsResponse = MovieDetailsResponseDto.fromJson(jsonData);
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return Right(detailsResponse);
       } else {
@@ -111,11 +112,11 @@ class ApiManger {
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi)) {
       Uri url = Uri.parse(
-          "https://${apiBaseUrl}${apiMovieEndPoint}/${movieId}/similar?api_key=${apiKey}");
+          "https://${apiBaseUrl}${apiMovieEndPoint}${movieId}/similar?api_key=${apiKey}");
 
       var response = await http.get(url);
       var popularResponse =
-          MovieResponseDto.fromJson(jsonDecode(response.body));
+          MovieResponseDto.fromJson(await jsonDecode(response.body));
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return Right(popularResponse);
       } else {

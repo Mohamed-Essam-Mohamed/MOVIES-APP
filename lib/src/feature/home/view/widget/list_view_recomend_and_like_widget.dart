@@ -178,7 +178,9 @@ class ImageItemReleasesWidget extends StatefulWidget {
 class _ImageItemReleasesWidgetState extends State<ImageItemReleasesWidget> {
   @override
   Widget build(BuildContext context) {
-    final cubit = WatchListViewModelCubit.get(context);
+    var cubit = BlocProvider.of<WatchListViewModelCubit>(context, listen: true);
+    bool isWatchList = cubit.moviesDataBase.keys
+        .contains(widget.viewModel.movieRecommendList[widget.index].id!);
     return ClipRRect(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(10.r),
@@ -199,18 +201,12 @@ class _ImageItemReleasesWidgetState extends State<ImageItemReleasesWidget> {
           ),
           InkWell(
             onTap: () {
-              if (cubit.checkWatchListExist(
-                  widget.viewModel.movieRecommendList[widget.index].id!)) {
-                //! delete object from database
-              } else {
-                cubit.addToWatchList(
-                    widget.viewModel.movieRecommendList[widget.index]);
-              }
-              setState(() {});
+              cubit.deleteOrAddWatchList(
+                  widget.viewModel.movieRecommendList[widget.index].id!,
+                  widget.viewModel.movieRecommendList[widget.index]);
             },
             child: SvgPicture.asset(
-              cubit.checkWatchListExist(
-                      widget.viewModel.movieRecommendList[widget.index].id!)
+              isWatchList
                   ? 'assets/svg_icons/bookmark-selected.svg'
                   : 'assets/svg_icons/bookmark.svg',
               width: 28.w,

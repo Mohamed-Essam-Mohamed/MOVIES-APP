@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
@@ -23,7 +24,10 @@ class ImageItemWidget extends StatefulWidget {
 class _ImageItemWidgetState extends State<ImageItemWidget> {
   @override
   Widget build(BuildContext context) {
-    var cubit = WatchListViewModelCubit.get(context);
+    var cubit = BlocProvider.of<WatchListViewModelCubit>(context, listen: true);
+
+    bool isWatchList =
+        cubit.moviesDataBase.keys.contains(widget.moviesWatchListDataBase.id!);
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.r),
@@ -41,19 +45,15 @@ class _ImageItemWidgetState extends State<ImageItemWidget> {
           ),
           InkWell(
             onTap: () {
-              if (cubit.checkWatchListExist(
-                  widget.moviesWatchListDataBase.id ?? 1000)) {
-                // cubit.deleteOne(widget.moviesWatchListDataBase);
-              } else {
-                cubit.addToWatchList(widget.moviesWatchListDataBase);
-              }
-              setState(() {});
+              cubit.deleteOrAddWatchList(widget.moviesWatchListDataBase.id!,
+                  widget.moviesWatchListDataBase);
             },
             child: SvgPicture.asset(
-              cubit.checkWatchListExist(widget.moviesWatchListDataBase.id!)
+              //? update this
+              isWatchList
                   ? 'assets/svg_icons/bookmark-selected.svg'
                   : 'assets/svg_icons/bookmark.svg',
-              width: 28.w,
+              width: 26.w,
               height: 36.h,
               fit: BoxFit.fill,
             ),

@@ -8,4 +8,5 @@ class AppColors {
   static const cardDarkColor = Color(0xff343534);
   static const greyLightColor = Color(0xffB5B4B4);
   static const greyDarkColor = Color(0xff707070);
+  static const redColor = Colors.red;
 }

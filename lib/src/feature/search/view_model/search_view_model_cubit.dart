@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 import 'package:movies_app/src/data/model/response/movie_details_respons_dto.dart';
 import 'package:movies_app/src/repository/search_repository/search_repository_contract.dart';
@@ -13,8 +14,18 @@ class SearchViewModelCubit extends Cubit<SearchViewModelState> {
   List<MovieDetailsResponseDto>? moviesListClear = [];
 
   int page = 1;
+  //? pagination
 
-  getSearchMovies({required String query}) async {
+  void nextPage({required String query}) async {
+    await Future.delayed(const Duration(seconds: 1), () {
+      page++;
+      getSearchMovies(query: query, page: page);
+    });
+
+    emit(SearchViewModelSuccess(moviesList: moviesListClear));
+  }
+
+  getSearchMovies({required String query, required int page}) async {
     emit(SearchViewModelLoading());
     var either =
         await searchRepository.getMoviesSearchQuery(query: query, page: page);
@@ -29,11 +40,12 @@ class SearchViewModelCubit extends Cubit<SearchViewModelState> {
         } else if (response.totalResults == 0) {
           emit(SearchViewModelEmpty());
         } else {
-          moviesList = response.results ?? [];
+          moviesList?.addAll(response.results ?? []);
           // clear null  poster path
-          moviesListClear = moviesList
-              ?.where((element) => element.posterPath != null)
-              .toList();
+          moviesListClear?.addAll(moviesList
+                  ?.where((element) => element.posterPath != null)
+                  .toList() ??
+              []);
 
           emit(SearchViewModelSuccess(moviesList: response.results));
         }

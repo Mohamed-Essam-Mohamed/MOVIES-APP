@@ -13,38 +13,44 @@ class WatchListViewModelCubit extends Cubit<WatchListViewModelState> {
   static WatchListViewModelCubit get(context) => BlocProvider.of(context);
 
   List<MovieDetailsResponseDto> movieDetailsResponseDto = [];
-  var watchListDataBase =
+  var moviesDataBase =
       Hive.box<MovieDetailsResponseDto>(HiveConst.moviesWatchList);
   //? function to get all data in hive
   void getAllData() {
     emit(WatchListViewModelLoading());
-    movieDetailsResponseDto = watchListDataBase.values.toList();
+    movieDetailsResponseDto = moviesDataBase.values.toList();
     emit(WatchListViewModelSuccess());
   }
 
-  bool checkWatchListExist(int id) {
-    getAllData();
-    for (var element in watchListDataBase.values) {
-      if (element.id == id) {
-        return true;
-      }
+  //? chaeck list is empty or not
+  void checkListEmpty() {
+    if (movieDetailsResponseDto.isEmpty) {
+      emit(WatchListViewModelEmpty());
+    } else {
+      emit(WatchListViewModelSuccess());
     }
-    return false;
   }
 
-  //? function to Delete object from database in hive
-  void deleteOne(MovieDetailsResponseDto movieDetailsResponseDto) {
-    emit(WatchListViewModelLoading());
-    watchListDataBase.delete(movieDetailsResponseDto.id);
-    getAllData();
-    emit(WatchListViewModelSuccess());
+  deleteOrAddWatchList(
+      int id, MovieDetailsResponseDto movieDetailsResponseDto) async {
+    if (moviesDataBase.keys.contains(id)) {
+      await deleteFromWatchList(id);
+      emit(WatchListViewModelSuccess());
+    } else {
+      await addToWatchList(id, movieDetailsResponseDto);
+      emit(WatchListViewModelSuccess());
+    }
   }
 
-  void addToWatchList(MovieDetailsResponseDto movieDetailsResponseDto) {
-    emit(WatchListViewModelLoading());
-    watchListDataBase.add(movieDetailsResponseDto);
+  Future<void> addToWatchList(
+      int id, MovieDetailsResponseDto movieDetailsResponseDto) async {
+    await moviesDataBase.put(id, movieDetailsResponseDto);
     getAllData();
-    emit(WatchListViewModelSuccess());
+  }
+
+  Future<void> deleteFromWatchList(int id) async {
+    await moviesDataBase.delete(id);
+    getAllData();
   }
 }
 

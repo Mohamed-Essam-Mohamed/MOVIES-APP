@@ -64,13 +64,14 @@ class PopularSection extends StatelessWidget {
         },
         child: ImageItemWidget(
           imagePath: result.posterPath ?? '',
-          moviesWatchListDataBase: MoviesWatchListDataBase(
-            id: result.id,
-            title: result.title,
-            posterPath: result.posterPath,
-            releaseDate: result.releaseDate,
-            voteAverage: result.voteAverage,
-          ),
+          moviesWatchListDataBase: result,
+          //  MoviesWatchListDataBase(
+          //   id: result.id,
+          //   title: result.title,
+          //   posterPath: result.posterPath,
+          //   releaseDate: result.releaseDate,
+          //   voteAverage: result.voteAverage,
+          // ),
         ),
       ),
     );

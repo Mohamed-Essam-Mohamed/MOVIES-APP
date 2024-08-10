@@ -39,13 +39,7 @@ class DetailsBrowsePage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
               child: ListView.separated(
                 itemBuilder: (context, index) => WatchListItemWidget(
-                  imagePath: viewModel.moviesListClear?[index].posterPath ?? "",
-                  title: viewModel.moviesListClear?[index].title ?? "",
-                  date: viewModel.moviesListClear?[index].releaseDate ?? "",
-                  rating: viewModel.moviesListClear?[index].voteAverage ?? "",
-                  language:
-                      viewModel.moviesListClear![index].originalLanguage ?? "",
-                  id: viewModel.moviesListClear?[index].id ?? 0,
+                  moviesWatchListDataBase: viewModel.moviesListClear![index],
                 ),
                 separatorBuilder: (context, index) =>
                     Divider(color: Colors.white.withOpacity(0.2)),
