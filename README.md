@@ -15,10 +15,11 @@ using different endpoints and he can view the website of the article, the app al
 ## 🤳 Screens
 
 - **Splash Screen:** Adding a splash screen to your Android app. 
-- **Home Screen:** You start with categories and then you can navigate to the news based on choosing the desired category on the same scaffold.
-- **Drawer Screen:** It is possible to move to the category when we are in the news and vice versa is true.
-- **Details Screen:** When the user clicks on an article, it will go to this screen to show the details of this article and when the user clicks on view article, it will view its link in the user’s default browser.
-- **Search Screen:** It is the same as the previous screen but in appear there is a search bar where the user can write the name of the article to search on it in API, and  it is shown when the user clicks on the search icon in the previous screen.
+- **Home Screen:** Show new movies and show famous films and show films nominated for you and you can add any of them to the basket for viewing later.
+- **Search Screen:** Find What You Want From Movies.
+- **Browse Screen:** Describe movies for easy access you love.
+- **WatchList Screen:** Movies WhatchList .
+
 
 
 
