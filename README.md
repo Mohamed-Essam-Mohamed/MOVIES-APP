@@ -35,7 +35,11 @@ using different endpoints and he can view the website of the article, the app al
 
 
 ## 🎥 Video
-https://github.com/Mohamed-Essam-Mohamed/news_app/assets/152906492/41055297-8442-4ee2-9ba4-fd184fee4a1a
+
+
+
+https://github.com/user-attachments/assets/726e80fb-f277-40e5-b012-ed40062c7a8e
+
 
 
 ## 🛠 Dependencies
