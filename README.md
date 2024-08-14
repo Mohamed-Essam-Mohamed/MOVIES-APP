@@ -11,6 +11,7 @@
 - Animation Widget.
 - Design Pattern.
   
+  
 ## 🤳 Screens
 
 - **Splash Screen:** Adding a splash screen to your Android app. 
