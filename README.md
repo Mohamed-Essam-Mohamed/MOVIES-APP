@@ -1,7 +1,6 @@
 #MOVIES APP
 
 ## 🚀 Getting Started
-
 - Clean Code (Claen Architecture & Architecture pattern/MVVM).
 - The application is fully API-dependent(HTTP).
 - pagination in Search.
